@@ -1,3 +1,5 @@
 window.onload = function(){
-    ascene.components.inspector.openInspector(true);
+    ascene.addEventListener('loaded', function () {
+        ascene.components.inspector.openInspector(true);
+    });
 }
