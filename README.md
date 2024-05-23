@@ -1,2 +1,3 @@
-# waypoint-tagger
-A tool to tag waypoints on the map
+# Waypoint Tagger
+
+A web tool to tag waypoints on the map.
