@@ -18,5 +18,9 @@ function addMapToScene(mapContent) {
     const ascene = document.querySelector("a-scene");
     const mapEntity = document.createElement("a-entity");
     mapEntity.setObject3D('mesh', points);
+    
+    // The raycaster used by inspector will ignore this entity
+    mapEntity.setAttribute("data-aframe-inspector", "");
+
     ascene.appendChild(mapEntity);
 }

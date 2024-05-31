@@ -5,5 +5,9 @@ window.onload = function(){
         waitForElm("#add-map-input").then((inputElement) => {
             inputElement.addEventListener("change", loadMapFromFile);
         });
+
+        waitForElm(".add-waypoint").then((buttonElement) => {
+            buttonElement.addEventListener("click", addWaypoint);
+        });
     });
 }
