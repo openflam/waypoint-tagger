@@ -318,4 +318,4 @@ class PCDLoader extends THREE.Loader {
     }
 }
 
-export {PCDLoader};
+// export {PCDLoader};

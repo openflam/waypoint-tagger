@@ -1,12 +1,17 @@
 <html>
-  <head>
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <script type="module" src="scripts/pcd_model.js"></script>
-    <a-scene id="ascene" 
-        inspector="url: dependencies/aframe-inspector.min.js">
-    </a-scene>
-    <script src="scripts/load_inspector.js"></script>
-  </body>
+
+<head>
+  <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+</head>
+
+<body>
+  <a-scene id="ascene" inspector="url: dependencies/aframe-inspector.min.js">
+  </a-scene>
+
+  <script src="scripts/pcd-loader.js"></script>
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/add_map.js"></script>
+  <script src="scripts/main.js"></script>
+</body>
+
 </html>
