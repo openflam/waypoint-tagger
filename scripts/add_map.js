@@ -20,9 +20,3 @@ function addMapToScene(mapContent) {
     mapEntity.setObject3D('mesh', points);
     ascene.appendChild(mapEntity);
 }
-
-window.onload = function(){
-    ascene.addEventListener('loaded', function () {
-        ascene.components.inspector.openInspector(true);
-    });
-}
