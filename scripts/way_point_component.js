@@ -1,6 +1,8 @@
 AFRAME.registerComponent('way_point',{
     schema:{
-        id: {type: 'string'}
+        ID: {type: 'string'},
+        name: {type: 'string'},
+        description: {type: 'string'},
     },
     init: function(){
         var data = this.data;
