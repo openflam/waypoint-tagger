@@ -1,18 +1,22 @@
-AFRAME.registerComponent('way_point',{
-    schema:{
-        ID: {type: 'string'},
-        description: {type: 'string'},
-        neighbors: {type: 'string'},
+AFRAME.registerComponent('way_point', {
+    schema: {
+        ID: { type: 'string' },
+        description: { type: 'string' },
+        neighbors: { type: 'string' },
     },
 
-    update: function(oldData){
+    init: function () {
+        this.neighborLines = [];
+    },
+
+    update: function (oldData) {
         var data = this.data;
         var el = this.el;
 
         // If `oldData` is empty, then this means we're in the initialization process.
         // No need to update.
         if (Object.keys(oldData).length === 0) { return; }
-        
+
         // Update the ID
         if (data.ID !== oldData.ID) {
             el.setAttribute("id", data.ID);
@@ -52,7 +56,7 @@ AFRAME.registerComponent('way_point',{
                     // from being displayed.
                     continue;
                 }
-                
+
                 var neighborNeighbors = neighborComponent.data.neighbors.split(",");
                 // If the neighbor is not in the neighbor list, add it
                 if (neighborNeighbors.length === 1 && neighborNeighbors[0] === "") {
@@ -62,7 +66,35 @@ AFRAME.registerComponent('way_point',{
                     neighborNeighbors.push(data.ID);
                     neighborComponent.data.neighbors = neighborNeighbors.join(",");
                 }
+
+                // Add a line between this waypoint and the neighbor
+                this.addLineToNeighbor(neighbor);
             }
         }
     },
+
+    addLineToNeighbor: function (neighborId) {
+        var thisId = this.el.getAttribute("id");
+
+        // Assign start and end as alphabetically smaller and larger
+        startId = thisId < neighborId ? thisId : neighborId;
+        endId = thisId < neighborId ? neighborId : thisId;
+
+        // Check if the line already exists
+        lineId = startId + "-" + endId;
+        if (this.el.sceneEl.querySelector("#" + lineId)) {
+            return;
+        }
+
+        var line = document.createElement("a-entity");
+        line.setAttribute("id", lineId);
+        line.setAttribute("data-aframe-inspector", "");
+        line.setAttribute("waypoint_connection", {
+            startEntity: "#" + startId,
+            endEntity: "#" + endId,
+        });
+        this.el.sceneEl.appendChild(line);
+
+        this.neighborLines.push(line);
+    }
 });
