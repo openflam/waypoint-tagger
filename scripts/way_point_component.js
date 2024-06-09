@@ -18,20 +18,22 @@ AFRAME.registerComponent('way_point',{
             el.setAttribute("id", data.ID);
 
             // Update the neighbor list of the neighbors
-            var neighbors_array = data.neighbors.split(",");
-            for (neighbor of neighbors_array) {
-                // Update the neighbor's neighbor list
-                var neighborEntity = el.sceneEl.querySelector("#" + neighbor);
-                var neighborComponent = neighborEntity.components.way_point;
+            if (data.neighbors !== "") {
+                var neighbors_array = data.neighbors.split(",");
+                for (neighbor of neighbors_array) {
+                    // Update the neighbor's neighbor list
+                    var neighborEntity = el.sceneEl.querySelector("#" + neighbor);
+                    var neighborComponent = neighborEntity.components.way_point;
 
-                // Remove the this item from the neighbor list
-                var neighborNeighbors = neighborComponent.data.neighbors.split(",");
-                neighborNeighbors = neighborNeighbors.filter(
-                    (id) => (id != oldData.ID)
-                );
-                // Update the neighbor's neighbor list
-                neighborNeighbors.push(data.ID);
-                neighborComponent.data.neighbors = neighborNeighbors.join(",");
+                    // Remove the this item from the neighbor list
+                    var neighborNeighbors = neighborComponent.data.neighbors.split(",");
+                    neighborNeighbors = neighborNeighbors.filter(
+                        (id) => (id != oldData.ID)
+                    );
+                    // Update the neighbor's neighbor list
+                    neighborNeighbors.push(data.ID);
+                    neighborComponent.data.neighbors = neighborNeighbors.join(",");
+                }
             }
         }
 
@@ -40,8 +42,16 @@ AFRAME.registerComponent('way_point',{
             var neighbors = data.neighbors.split(",");
             for (neighbor of neighbors) {
                 // Update the neighbor's neighbor list
-                var neighborEntity = el.sceneEl.querySelector("#" + neighbor);
-                var neighborComponent = neighborEntity.components.way_point;
+                try {
+                    var neighborEntity = el.sceneEl.querySelector("#" + neighbor);
+                    var neighborComponent = neighborEntity.components.way_point;
+                }
+                catch (error) {
+                    // Inspector calls the setAttribute for every character entered. 
+                    // The catch block is used to prevent the error message of non-existing element
+                    // from being displayed.
+                    continue;
+                }
                 
                 var neighborNeighbors = neighborComponent.data.neighbors.split(",");
                 // If the neighbor is not in the neighbor list, add it
