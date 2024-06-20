@@ -9,5 +9,9 @@ window.onload = function(){
         waitForElm(".add-waypoint").then((buttonElement) => {
             buttonElement.addEventListener("click", addWaypoint);
         });
+
+        waitForElm(".download-waypoints").then((buttonElement) => {
+            buttonElement.addEventListener("click", downloadWaypoints);
+        });
     });
 }
