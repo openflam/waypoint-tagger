@@ -9,7 +9,7 @@ AFRAME.registerComponent('way_point', {
         this.neighborLines = [];
         this.textEntity = document.createElement("a-entity");
         this.textEntity.setAttribute("text", { 
-            "width": 10, 
+            "width": 5, 
             "value": this.data.ID ,
             "align": "center",
         });
@@ -31,7 +31,7 @@ AFRAME.registerComponent('way_point', {
             this.textEntity.setAttribute("text", {
                 "value" : data.ID,
             });
-            
+
             // Update the neighbor list of the neighbors
             if (data.neighbors !== "") {
                 var neighbors_array = data.neighbors.split(",");
