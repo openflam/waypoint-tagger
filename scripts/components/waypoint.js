@@ -7,6 +7,14 @@ AFRAME.registerComponent('way_point', {
 
     init: function () {
         this.neighborLines = [];
+        this.textEntity = document.createElement("a-entity");
+        this.textEntity.setAttribute("text", { 
+            "width": 10, 
+            "value": this.data.ID ,
+            "align": "center",
+        });
+        this.textEntity.setAttribute("position", { x: 0, y: 1.0, z: 0 });
+        this.el.appendChild(this.textEntity);
     },
 
     update: function (oldData) {
@@ -20,7 +28,10 @@ AFRAME.registerComponent('way_point', {
         // Update the ID
         if (data.ID !== oldData.ID) {
             el.setAttribute("id", data.ID);
-
+            this.textEntity.setAttribute("text", {
+                "value" : data.ID,
+            });
+            
             // Update the neighbor list of the neighbors
             if (data.neighbors !== "") {
                 var neighbors_array = data.neighbors.split(",");
