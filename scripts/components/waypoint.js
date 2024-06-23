@@ -57,10 +57,6 @@ AFRAME.registerComponent('way_point', {
             var neighbors_list = this.getValidNeighbors(data.neighbors);
             var oldNeighbors_list = this.getValidNeighbors(oldData.neighbors);
 
-            console.log("New neighbors and old neighbors:");
-            console.log(neighbors_list);
-            console.log(oldNeighbors_list);
-
             // Get the neighbors that are removed and added
             var removedNeighbors = oldNeighbors_list.filter(
                 (id) => (!neighbors_list.includes(id))
@@ -68,10 +64,6 @@ AFRAME.registerComponent('way_point', {
             var addedNeighbors = neighbors_list.filter(
                 (id) => (!oldNeighbors_list.includes(id))
             );
-
-            console.log("Removed neighbors and added neighbors:");
-            console.log(removedNeighbors);
-            console.log(addedNeighbors);
 
             // Add new neighbor
             for (neighbor of addedNeighbors) {
