@@ -6,6 +6,10 @@ window.onload = function(){
             inputElement.addEventListener("change", loadMapFromFile);
         });
 
+        waitForElm("#load-waypoints-input").then((inputElement) => {
+            inputElement.addEventListener("change", loadWaypointsFromFile);
+        });
+
         waitForElm(".add-waypoint").then((buttonElement) => {
             buttonElement.addEventListener("click", addWaypoint);
         });
