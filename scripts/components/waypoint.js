@@ -22,8 +22,14 @@ AFRAME.registerComponent('way_point', {
         var el = this.el;
 
         // If `oldData` is empty, then this means we're in the initialization process.
-        // No need to update.
-        if (Object.keys(oldData).length === 0) { return; }
+        // So oldData is set to the default value of the schema.
+        if (Object.keys(oldData).length === 0) { 
+            oldData = {
+                ID: "init-random-id-do-not-use",
+                description: "",
+                neighbors: "",
+            };
+        }
 
         // Update the ID
         if (data.ID !== oldData.ID) {
@@ -33,7 +39,8 @@ AFRAME.registerComponent('way_point', {
             });
 
             // Update the neighbor list of the neighbors
-            if (data.neighbors !== "") {
+            // If this is the first time the waypoint is created, do not update the neighbors
+            if (oldData.ID !== "init-random-id-do-not-use" && data.neighbors !== "") {
                 var neighbors_array = data.neighbors.split(",");
                 for (neighbor of neighbors_array) {
                     // Update the neighbor's neighbor list

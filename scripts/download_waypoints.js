@@ -11,7 +11,7 @@ function downloadWaypoints() {
             "x": entity.object3D.position.z,
             "y": entity.object3D.position.x,
             "z": entity.object3D.position.y,
-            "neighbors": entity.components.way_point.data.neighbors.replace(",", ";"),
+            "neighbors": entity.components.way_point.data.neighbors.replaceAll(",", ";"),
         });
     }
 

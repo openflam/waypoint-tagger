@@ -36,7 +36,8 @@ function createWaypointEntities(data) {
         const entity = document.createElement('a-entity');
 
         // Set the position from the CSV data
-        entity.setAttribute('position', `${row.x} ${row.y} ${row.z}`);
+        // The coordinates are swapped to match the A-frame coordinate system
+        entity.setAttribute('position', `${row.y} ${row.z} ${row.x}`);
 
         // Set the waypoint component with ID, description, and neighbors
         entity.setAttribute('way_point', {
@@ -59,7 +60,6 @@ function createWaypointEntities(data) {
     // This is done to ensure that all waypoints are loaded before updating neighbors
     // to make sure that the lines are drawn correctly.
     data.forEach(row => {
-        console.log(row.id);
         var entity = nameToEntity[row.id];
         var neighbors = row.neighbors.replaceAll(';', ',');
         entity.setAttribute('way_point', { neighbors: neighbors});
