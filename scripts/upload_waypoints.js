@@ -1,12 +1,12 @@
 function loadWaypointsFromFile(fileSelectEvent) {
     const reader = new FileReader();
-    
-    reader.addEventListener("load", function(event) {
+
+    reader.addEventListener("load", function (event) {
         csvFile = event.target.result;
         var parsedCSV = parseCSV(csvFile);
         createWaypointEntities(parsedCSV);
     });
-    
+
     reader.readAsText(fileSelectEvent.target.files[0]);
 }
 
@@ -62,6 +62,6 @@ function createWaypointEntities(data) {
     data.forEach(row => {
         var entity = nameToEntity[row.id];
         var neighbors = row.neighbors.replaceAll(';', ',');
-        entity.setAttribute('way_point', { neighbors: neighbors});
+        entity.setAttribute('way_point', { neighbors: neighbors });
     });
 }

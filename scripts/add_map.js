@@ -1,11 +1,11 @@
 function loadMapFromFile(fileSelectEvent) {
     const reader = new FileReader();
-    
-    reader.addEventListener("load", function(event) {
+
+    reader.addEventListener("load", function (event) {
         mapContent = event.target.result;
         addMapToScene(mapContent);
     });
-    
+
     reader.readAsArrayBuffer(fileSelectEvent.target.files[0]);
 }
 
@@ -18,7 +18,7 @@ function addMapToScene(mapContent) {
     const ascene = document.querySelector("a-scene");
     const mapEntity = document.createElement("a-entity");
     mapEntity.setObject3D('mesh', points);
-    
+
     // The raycaster used by inspector will ignore this entity
     mapEntity.setAttribute("data-aframe-inspector", "");
 

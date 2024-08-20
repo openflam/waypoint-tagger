@@ -8,9 +8,9 @@ AFRAME.registerComponent('way_point', {
     init: function () {
         this.neighborLines = [];
         this.textEntity = document.createElement("a-entity");
-        this.textEntity.setAttribute("text", { 
-            "width": 5, 
-            "value": this.data.ID ,
+        this.textEntity.setAttribute("text", {
+            "width": 5,
+            "value": this.data.ID,
             "align": "center",
         });
         this.textEntity.setAttribute("position", { x: 0, y: 1.0, z: 0 });
@@ -23,7 +23,7 @@ AFRAME.registerComponent('way_point', {
 
         // If `oldData` is empty, then this means we're in the initialization process.
         // So oldData is set to the default value of the schema.
-        if (Object.keys(oldData).length === 0) { 
+        if (Object.keys(oldData).length === 0) {
             oldData = {
                 ID: "init-random-id-do-not-use",
                 description: "",
@@ -35,7 +35,7 @@ AFRAME.registerComponent('way_point', {
         if (data.ID !== oldData.ID) {
             el.setAttribute("id", data.ID);
             this.textEntity.setAttribute("text", {
-                "value" : data.ID,
+                "value": data.ID,
             });
 
             // Update the neighbor list of the neighbors
