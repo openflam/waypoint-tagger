@@ -6,11 +6,9 @@ function downloadWaypoints() {
     for (const entity of waypoint_entities) {
         waypoint_info_list.push({
             "id": entity.getAttribute("id"),
-            // Due to the discrepency between A-frame and the other coordinate systems,
-            // the coordinates are swapped
-            "x": entity.object3D.position.z,
-            "y": entity.object3D.position.x,
-            "z": entity.object3D.position.y,
+            "x": entity.object3D.position.x,
+            "y": entity.object3D.position.y,
+            "z": entity.object3D.position.z,
             "neighbors": entity.components.way_point.data.neighbors.replaceAll(",", ";"),
         });
     }

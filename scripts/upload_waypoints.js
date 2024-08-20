@@ -12,6 +12,12 @@ function loadWaypointsFromFile(fileSelectEvent) {
 
 function parseCSV(csv) {
     const lines = csv.split('\n');
+
+    // Remove the last line if it's empty
+    if (lines[lines.length - 1].trim() === '') {
+        lines.pop();
+    }
+
     const headers = lines[0].split(',');
     const data = lines.slice(1).map(line => {
         const values = line.split(',');
@@ -36,8 +42,7 @@ function createWaypointEntities(data) {
         const entity = document.createElement('a-entity');
 
         // Set the position from the CSV data
-        // The coordinates are swapped to match the A-frame coordinate system
-        entity.setAttribute('position', `${row.y} ${row.z} ${row.x}`);
+        entity.setAttribute('position', `${row.x} ${row.y} ${row.z}`);
 
         // Set the waypoint component with ID, description, and neighbors
         entity.setAttribute('way_point', {
