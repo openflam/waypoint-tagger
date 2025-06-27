@@ -1,10 +1,15 @@
-function waitForElm(selector) {
+/**
+ * Waits for an element to be present in the DOM.
+ * @param selector The CSS selector to wait for.
+ */
+
+function waitForElement(selector: string): Promise<Element | null> {
     return new Promise(resolve => {
         if (document.querySelector(selector)) {
             return resolve(document.querySelector(selector));
         }
 
-        const observer = new MutationObserver(mutations => {
+        const observer = new MutationObserver(_mutations => {
             if (document.querySelector(selector)) {
                 observer.disconnect();
                 resolve(document.querySelector(selector));
@@ -18,3 +23,4 @@ function waitForElm(selector) {
     });
 }
 
+export { waitForElement };

@@ -1,10 +1,13 @@
+import type { Entity } from "aframe";
+
+type HeaderKeys = 'id' | 'x' | 'y' | 'z' | 'neighbors';
 function downloadWaypoints() {
     // Get all waypoints information
-    var waypoint_entities = document.querySelectorAll("[way_point]");
+    var waypoint_entities = document.querySelectorAll("[way_point]") as NodeListOf<Entity>;
 
-    var waypoint_info_list = [];
+    var waypointInfoList = [];
     for (const entity of waypoint_entities) {
-        waypoint_info_list.push({
+        waypointInfoList.push({
             "id": entity.getAttribute("id"),
             "x": entity.object3D.position.x,
             "y": entity.object3D.position.y,
@@ -15,9 +18,9 @@ function downloadWaypoints() {
 
     // Create CSV file
     var csvRows = [];
-    var headers = Object.keys(waypoint_info_list[0]);
+    var headers = Object.keys(waypointInfoList[0]) as HeaderKeys[];
     csvRows.push(headers.join(','));
-    for (const row of waypoint_info_list) {
+    for (const row of waypointInfoList) {
         var values = headers.map(header => {
             var val = row[header];
             return `"${val}"`;
@@ -35,3 +38,5 @@ function downloadWaypoints() {
     document.body.appendChild(downloadLink); // Add the link to the DOM
     downloadLink.click(); // Click the link
 }
+
+export { downloadWaypoints };

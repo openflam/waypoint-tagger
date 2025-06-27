@@ -1,16 +1,28 @@
-function loadWaypointsFromFile(fileSelectEvent) {
+import type { Entity } from "aframe";
+
+function loadWaypointsFromFile(fileSelectEvent: Event): void {
     const reader = new FileReader();
 
     reader.addEventListener("load", function (event) {
-        csvFile = event.target.result;
-        var parsedCSV = parseCSV(csvFile);
+        if (!event.target || !event.target.result) {
+            console.error("Failed to read the file.");
+            return;
+        }
+        const csvFile = event.target.result;
+        const parsedCSV = parseCSV(csvFile as string);
         createWaypointEntities(parsedCSV);
     });
 
+    if (!fileSelectEvent.target
+        || !(fileSelectEvent.target instanceof HTMLInputElement)
+        || !fileSelectEvent.target.files) {
+        console.error("File select event target is not defined.");
+        return;
+    }
     reader.readAsText(fileSelectEvent.target.files[0]);
 }
 
-function parseCSV(csv) {
+function parseCSV(csv: string): { [header: string]: string }[] {
     const lines = csv.split('\n');
 
     // Remove the last line if it's empty
@@ -21,7 +33,7 @@ function parseCSV(csv) {
     const headers = lines[0].split(',');
     const data = lines.slice(1).map(line => {
         const values = line.split(',');
-        const obj = {};
+        const obj: { [header: string]: string } = {};
         headers.forEach((header, index) => {
             let value = values[index].trim();
             if (value.startsWith('"') && value.endsWith('"')) {
@@ -34,9 +46,9 @@ function parseCSV(csv) {
     return data;
 }
 
-function createWaypointEntities(data) {
+function createWaypointEntities(data: { [header: string]: string }[]): void {
     const scene = document.querySelector('a-scene');
-    var nameToEntity = {};
+    var nameToEntity: { [rowID: string]: Entity } = {};
 
     data.forEach(row => {
         const entity = document.createElement('a-entity');
@@ -55,7 +67,7 @@ function createWaypointEntities(data) {
         entity.setAttribute("gltf-model", "#waypoint_model");
 
         // Append the entity to the scene
-        scene.appendChild(entity);
+        scene!.appendChild(entity);
 
         // Store the entity in a map for easy access
         nameToEntity[row.id] = entity;
@@ -70,3 +82,7 @@ function createWaypointEntities(data) {
         entity.setAttribute('way_point', { neighbors: neighbors });
     });
 }
+
+export {
+    loadWaypointsFromFile
+};
