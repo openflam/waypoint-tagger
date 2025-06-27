@@ -1,3 +1,7 @@
+import type { LineBasicMaterial } from "three";
+import type { BufferGeometry } from "three";
+import type { Line } from "three";
+
 AFRAME.registerComponent('waypoint_connection', {
     schema: {
         startEntity: { type: 'selector' },
@@ -7,19 +11,23 @@ AFRAME.registerComponent('waypoint_connection', {
         linewidth: { type: 'number', default: 5 }, // This doesn't seem to work
     },
 
+    material: null as LineBasicMaterial | null,
+    geometry: null as BufferGeometry | null,
+    line: null as Line | null,
+
     init: function () {
         var data = this.data;
         var geometry;
         var material;
-        material = this.material = new THREE.LineBasicMaterial({
+        material = this.material = new AFRAME.THREE.LineBasicMaterial({
             color: data.color,
             opacity: data.opacity,
             transparent: data.opacity < 1,
             visible: true,
             linewidth: data.linewidth,
         });
-        geometry = this.geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(2 * 3), 3));
+        geometry = this.geometry = new AFRAME.THREE.BufferGeometry();
+        geometry.setAttribute('position', new AFRAME.THREE.BufferAttribute(new Float32Array(2 * 3), 3));
         var positionArray = geometry.attributes.position.array;
         positionArray[0] = data.startEntity.object3D.position.x
         positionArray[1] = data.startEntity.object3D.position.y
@@ -28,21 +36,21 @@ AFRAME.registerComponent('waypoint_connection', {
         positionArray[4] = data.endEntity.object3D.position.y
         positionArray[5] = data.endEntity.object3D.position.z
 
-        this.line = new THREE.Line(geometry, material);
+        this.line = new AFRAME.THREE.Line(geometry, material);
 
-        lineid = data.startEntity.getAttribute("id") + "-" + data.endEntity.getAttribute("id");
-        this.el.setObject3D(lineid, this.line);
+        const lineId = data.startEntity.getAttribute("id") + "-" + data.endEntity.getAttribute("id");
+        this.el.setObject3D(lineId, this.line);
     },
 
-    tick: function (time, timeDelta) {
+    tick: function (_time, _timeDelta) {
         var data = this.data;
-        var positionArray = this.geometry.attributes.position.array;
+        var positionArray = this.geometry!.attributes.position.array;
         positionArray[0] = data.startEntity.object3D.position.x
         positionArray[1] = data.startEntity.object3D.position.y
         positionArray[2] = data.startEntity.object3D.position.z
         positionArray[3] = data.endEntity.object3D.position.x
         positionArray[4] = data.endEntity.object3D.position.y
         positionArray[5] = data.endEntity.object3D.position.z
-        this.geometry.attributes.position.needsUpdate = true;
+        this.geometry!.attributes.position.needsUpdate = true;
     }
 });

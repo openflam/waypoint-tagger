@@ -1,0 +1,22 @@
+{
+  "name": "waypoint-tagger",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "deploy": "tsc && vite build && gh-pages -d dist"
+  },
+  "devDependencies": {
+    "@types/aframe": "^1.2.8",
+    "@types/three": "^0.177.0",
+    "gh-pages": "^6.3.0",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0"
+  },
+  "dependencies": {
+    "three": "^0.177.0"
+  }
+}
