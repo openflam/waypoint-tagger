@@ -24,3 +24,9 @@ The static webpage files are written to the `dist/` directory. Run any HTTP serv
 ```
 cd dist && python3 -m http.server
 ```
+
+### Deploy
+
+```
+npm run deploy
+```
