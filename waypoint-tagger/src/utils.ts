@@ -18,7 +18,7 @@ function waitForElement(selector: string): Promise<Element | null> {
 
         observer.observe(document.body, {
             childList: true,
-            subtree: true
+            subtree: true,
         });
     });
 }
