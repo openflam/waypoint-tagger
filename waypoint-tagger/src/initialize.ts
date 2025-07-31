@@ -1,5 +1,5 @@
 import { addWaypoint } from "./button-handlers/addWaypoint";
-import { downloadWaypoints } from "./button-handlers/downloadWaypoints";
+import { downloadWaypointsAsJSON } from "./button-handlers/downloadWaypointsAsJSON";
 import { loadGLBFromFile } from "./button-handlers/loadGLB";
 import { loadWaypointsFromFile } from "./button-handlers/loadWaypoints";
 import { waitForElement } from "./utils";
@@ -35,7 +35,7 @@ function attachButtonListeners() {
     });
 
     waitForElement(".download-waypoints").then(buttonElement => {
-        buttonElement!.addEventListener("click", downloadWaypoints);
+        buttonElement!.addEventListener("click", downloadWaypointsAsJSON);
     });
 }
 
