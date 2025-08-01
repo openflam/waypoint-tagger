@@ -1,2 +1,2 @@
-import "./waypoint";
-import "./waypointConnection";
+import './waypoint';
+import './waypointConnection';

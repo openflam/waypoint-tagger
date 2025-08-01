@@ -1,6 +1,6 @@
 // @ts-ignore
 const DRACO_LOADER = new THREE.DRACOLoader().setDecoderPath(
-    "https://www.gstatic.com/draco/versioned/decoders/1.5.7/"
+    'https://www.gstatic.com/draco/versioned/decoders/1.5.7/',
 );
 
 function loadGLBFromFile(fileSelectEvent: Event): void {
@@ -23,9 +23,7 @@ function addGLBToScene(mapContent: ArrayBuffer): void {
     // @ts-ignore
     const gltfLoader = new THREE.GLTFLoader().setDRACOLoader(DRACO_LOADER);
 
-    const mapContentBlob = new Blob([mapContent], {
-        type: "application/octet-stream",
-    });
+    const mapContentBlob = new Blob([mapContent], { type: 'application/octet-stream' });
     const fileURL = URL.createObjectURL(mapContentBlob);
 
     gltfLoader.load(fileURL, function (gltf: any) {
@@ -35,7 +33,7 @@ function addGLBToScene(mapContent: ArrayBuffer): void {
         const model = gltf.scene || gltf.scenes[0];
 
         const mapEntity = document.createElement("a-entity");
-        mapEntity.setObject3D("mesh", model);
+        mapEntity.setObject3D('mesh', model);
 
         // The raycaster used by inspector will ignore this entity
         mapEntity.setAttribute("data-aframe-inspector", "");
@@ -49,4 +47,6 @@ function addGLBToScene(mapContent: ArrayBuffer): void {
     });
 }
 
-export { loadGLBFromFile };
+export {
+    loadGLBFromFile
+}
