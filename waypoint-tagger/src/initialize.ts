@@ -1,8 +1,8 @@
 import { waitForElement } from "./utils";
+import { downloadWaypointsAsJSON } from "./button-handlers/downloadWaypointsAsJSON";
 import { loadGLBFromFile } from "./button-handlers/loadGLB";
 import { loadWaypointsFromFile } from "./button-handlers/loadWaypoints";
 import { addWaypoint } from "./button-handlers/addWaypoint";
-import { downloadWaypoints } from "./button-handlers/downloadWaypoints";
 
 function initializeAframeInspector() {
     window.addEventListener('load', () => {
@@ -34,8 +34,8 @@ function attachButtonListeners() {
         buttonElement!.addEventListener("click", addWaypoint);
     });
 
-    waitForElement(".download-waypoints").then((buttonElement) => {
-        buttonElement!.addEventListener("click", downloadWaypoints);
+    waitForElement(".download-waypoints").then(buttonElement => {
+        buttonElement!.addEventListener("click", downloadWaypointsAsJSON);
     });
 }
 
