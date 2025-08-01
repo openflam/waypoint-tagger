@@ -7,7 +7,7 @@ id,x,y,z,neighbors
 "StudentE","-4.16253","-1","-5.2185","Professor"
 "StudentF","-2.81188","-1","-5.28351","Professor"
 "StudentG","-1.19974","-1","-5.21431","Professor"
-"StudentH","0.50184","-1","-5.15294","ProfessorProfessor"
+"StudentH","0.50184","-1","-5.15294","Professor"
 "StaffOffice","2.61439","-1","0.41135","Professor;Hallway"
 "Hallway","-0.56477","-1","0.81094","StaffOffice;StudentI;StudentJ;StudentN;StudentM;StudentL;StudentK;ConferenceRoom"
 "StudentI","-0.11917","-1","-2.35952","Hallway"
