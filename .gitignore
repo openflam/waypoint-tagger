@@ -1,5 +1,10 @@
-.DS_Store
 __pycache__
+
+# Sample data checked-in. Do not track changes.
 sample_data
 
+# VSCode settings
 .vscode
+
+# Temp files
+.DS_Store

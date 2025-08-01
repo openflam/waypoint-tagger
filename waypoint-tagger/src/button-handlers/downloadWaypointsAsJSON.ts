@@ -30,79 +30,79 @@ import type { Entity } from "aframe";
  * @param b - The second entity to compare, must implement `getAttribute('id'): string`
  */
 const byId = (a: Entity, b: Entity) =>
-    a.getAttribute("id").localeCompare(b.getAttribute("id"));
+  a.getAttribute("id").localeCompare(b.getAttribute("id"));
 
 function downloadWaypointsAsJSON() {
-    // get all way_point entities, sorted by id
-    const waypointEntities = Array.from(
-        document.querySelectorAll("[way_point]") as NodeListOf<Entity>
-    ).sort(byId);
+  // get all way_point entities, sorted by id
+  const waypointEntities = Array.from(
+    document.querySelectorAll("[way_point]") as NodeListOf<Entity>,
+  ).sort(byId);
 
-    // create a _sorted_ dictionary of waypoints, with 'id' as key
-    const waypointEntitiesMap = new Map<
-        string,
-        {
-            id: string;
-            x: number;
-            y: number;
-            z: number;
-            neighbors: Array<string>; // array of ids
-        }
-    >();
-    for (const wp of waypointEntities) {
-        const id = wp.getAttribute("id"); // TODO: this should be numeric!
-        const { x, y, z } = wp.object3D.position;
-        const neighbors = wp.components.way_point.data.neighbors.split(",");
-        waypointEntitiesMap.set(id, { id, x, y, z, neighbors });
+  // create a _sorted_ dictionary of waypoints, with 'id' as key
+  const waypointEntitiesMap = new Map<
+    string,
+    {
+      id: string;
+      x: number;
+      y: number;
+      z: number;
+      neighbors: Array<string>; // array of ids
     }
+  >();
+  for (const wp of waypointEntities) {
+    const id = wp.getAttribute("id"); // TODO: this should be numeric!
+    const { x, y, z } = wp.object3D.position;
+    const neighbors = wp.components.way_point.data.neighbors.split(",");
+    waypointEntitiesMap.set(id, { id, x, y, z, neighbors });
+  }
 
-    // initialize the array of output elements
-    const elements = [];
+  // initialize the array of output elements
+  const elements = [];
 
-    // iterate through nodes in _increasing_ order of id
-    for (const [_, { id, x, y, z, neighbors }] of waypointEntitiesMap) {
-        // add way_point as 'node'
-        const waypointNode = {
-            type: "node",
-            id,
-            lat: x,
-            "ele:local": y,
-            lon: z,
-        };
-        elements.push(waypointNode);
+  // iterate through nodes in _increasing_ order of id
+  for (const [_, { id, x, y, z, neighbors }] of waypointEntitiesMap) {
+    // add way_point as 'node'
+    const waypointNode = {
+      type: "node",
+      id,
+      lat: x,
+      "ele:local": y,
+      lon: z,
+    };
+    elements.push(waypointNode);
 
-        // add connections as 'ways' (& do a simple check)
-        for (const neighborId of neighbors) {
-            const neighborNode = waypointEntitiesMap.get(neighborId);
-            if (!neighborNode?.neighbors.includes(id)) {
-                throw new Error(
-                    `bad input: node ${id} is neighbors with node ${neighborId}, but not vice versa`
-                );
-            }
+    // add connections as 'ways' (& do a simple check)
+    for (const neighborId of neighbors) {
+      const neighborNode = waypointEntitiesMap.get(neighborId);
+      if (!neighborNode?.neighbors.includes(id)) {
+        throw new Error(
+          `bad input: node ${id} is neighbors with node ${neighborId}, but not vice versa`,
+        );
+      }
 
-            // add connection as 'way' (if it's not already added)
-            if (id.localeCompare(neighborId) >= 0) continue;
-            const connectionWay = {
-                type: "way",
-                id: `${id}-${neighborId}`, // TODO: should be numeric
-                nodes: [id, neighborId],
-                tags: {}, // TODO: should this be e.g. door=yes?
-            };
-            elements.push(connectionWay);
-        }
+      // add connection as 'way' (if it's not already added)
+      if (id.localeCompare(neighborId) >= 0) continue;
+      const connectionWay = {
+        type: "way",
+        id: `${id}-${neighborId}`, // TODO: should be numeric
+        nodes: [id, neighborId],
+        tags: {}, // TODO: should this be e.g. door=yes?
+      };
+      elements.push(connectionWay);
     }
+  }
 
-    // create JSON file
-    const jsonData = JSON.stringify({ elements }, null, 2); // 2-space indent
-    const jsonFile = new Blob([jsonData], { type: "application/json" });
+  // create JSON file
+  const jsonData = JSON.stringify({ elements }, null, 2); // 2-space indent
+  const jsonFile = new Blob([jsonData], { type: "application/json" });
 
-    // download the JSON file
-    const downloadLink = document.createElement("a");
-    downloadLink.download = "waypoints_graph.json"; // default file name
-    downloadLink.href = window.URL.createObjectURL(jsonFile); // create a link to the file
-    downloadLink.style.display = "none"; // hide link
-    document.body.appendChild(downloadLink); // add the link to the DOM
-    downloadLink.click(); // click the link
+  // download the JSON file
+  const downloadLink = document.createElement("a");
+  downloadLink.download = "waypoints_graph.json"; // default file name
+  downloadLink.href = window.URL.createObjectURL(jsonFile); // create a link to the file
+  downloadLink.style.display = "none"; // hide link
+  document.body.appendChild(downloadLink); // add the link to the DOM
+  downloadLink.click(); // click the link
 }
 
 export { downloadWaypointsAsJSON };
