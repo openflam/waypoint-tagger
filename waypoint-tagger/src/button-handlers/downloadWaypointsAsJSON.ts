@@ -22,15 +22,15 @@
  */
 
 import type { Entity } from "aframe";
+import { ElementArraySchema } from "../schema";
 
 /**
  * compares two entities by their "id" attribute in lexicographical order.
  *
- * @param a - The first entity to compare, must implement `getAttribute('id'): string`
- * @param b - The second entity to compare, must implement `getAttribute('id'): string`
+ * @param a - The first entity to compare, must have 'id' field (string)
+ * @param b - The second entity to compare, must have 'id' field (string)
  */
-const byId = (a: Entity, b: Entity) =>
-  a.getAttribute("id").localeCompare(b.getAttribute("id"));
+const byId = (a: Entity, b: Entity) => a.id.localeCompare(b.id);
 
 function downloadWaypointsAsJSON() {
   // get all way_point entities, sorted by id
@@ -91,6 +91,9 @@ function downloadWaypointsAsJSON() {
       elements.push(connectionWay);
     }
   }
+
+  // validate entries; throws error on failure
+  ElementArraySchema.parse(elements);
 
   // create JSON file
   const jsonData = JSON.stringify({ elements }, null, 2); // 2-space indent
