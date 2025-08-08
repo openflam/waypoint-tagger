@@ -22,7 +22,7 @@ function loadWaypointsFromFile(fileSelectEvent: Event): void {
       loadWaypointsFromJSONFile(file);
       return;
     default:
-      throw new Error(`unsupported filed extension: .${extension}`);
+      throw new Error(`unsupported file extension: .${extension}`);
   }
 }
 
