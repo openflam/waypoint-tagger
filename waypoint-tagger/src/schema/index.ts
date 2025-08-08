@@ -3,6 +3,7 @@ import * as z from "zod";
 export const NodeSchema = z.object({
   type: z.literal("node"),
   id: z.string().min(1), // can't be empty
+  description: z.string(),
   lat: z.number(), // x
   "ele:local": z.number(), // y
   lon: z.number(), // z
