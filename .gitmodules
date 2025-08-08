@@ -1,0 +1,3 @@
+[submodule "aframe-inspector"]
+	path = aframe-inspector
+	url = git@github.com:openflam/aframe-inspector.git
