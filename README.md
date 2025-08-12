@@ -11,6 +11,9 @@ cd waypoint-tagger
 npm install
 ```
 
+**A-Frame inspector**
+If you are going to change aframe-inspector, add `aframe-inspector` submodule: `git submodule update --init`. Then install the dependencies of aframe-inspector: `cd aframe-inspector && npm install`.
+
 ### Build
 
 ```
