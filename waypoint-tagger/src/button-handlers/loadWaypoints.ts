@@ -1,6 +1,8 @@
 import type { Entity } from "aframe";
 import { ElementArraySchema, type Element } from "../schema";
+import { clearWaypoints } from "./clearWaypoints";
 
+/* loads either from a CSV or JSON, depending on the extension */
 function loadWaypointsFromFile(fileSelectEvent: Event): void {
   const input = fileSelectEvent.target;
   if (
@@ -12,17 +14,21 @@ function loadWaypointsFromFile(fileSelectEvent: Event): void {
     throw new Error("file select target is not defined");
 
   const file = input.files![0];
-  const [extension] = file.name.split(".").slice(-1);
+  const extension = file.name.split(".").slice(-1)[0].toLowerCase();
 
-  switch (extension.toLowerCase()) {
+  if (!["csv", "json"].includes(extension))
+    throw new Error(`unsupported file extension: .${extension}`);
+
+  // clear existing waypoints before loading new ones
+  clearWaypoints();
+
+  switch (extension) {
     case "csv":
       loadWaypointsFromCSVFile(file);
       return;
     case "json":
       loadWaypointsFromJSONFile(file);
       return;
-    default:
-      throw new Error(`unsupported file extension: .${extension}`);
   }
 }
 
