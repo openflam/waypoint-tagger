@@ -11,7 +11,10 @@
     {
       "type": "way",
       "id": "ArenaLab-ArenaLabDoor",
-      "nodes": ["ArenaLab", "ArenaLabDoor"],
+      "nodes": [
+        "ArenaLab",
+        "ArenaLabDoor"
+      ],
       "tags": {}
     },
     {
@@ -25,13 +28,19 @@
     {
       "type": "way",
       "id": "ArenaLabDoor-ConferenceRoom",
-      "nodes": ["ArenaLabDoor", "ConferenceRoom"],
+      "nodes": [
+        "ArenaLabDoor",
+        "ConferenceRoom"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "ArenaLabDoor-Lobby2300",
-      "nodes": ["ArenaLabDoor", "Lobby2300"],
+      "nodes": [
+        "ArenaLabDoor",
+        "Lobby2300"
+      ],
       "tags": {}
     },
     {
@@ -45,7 +54,10 @@
     {
       "type": "way",
       "id": "ConferenceRoom-Hallway",
-      "nodes": ["ConferenceRoom", "Hallway"],
+      "nodes": [
+        "ConferenceRoom",
+        "Hallway"
+      ],
       "tags": {}
     },
     {
@@ -59,7 +71,10 @@
     {
       "type": "way",
       "id": "Entrance2300-Lobby2300",
-      "nodes": ["Entrance2300", "Lobby2300"],
+      "nodes": [
+        "Entrance2300",
+        "Lobby2300"
+      ],
       "tags": {}
     },
     {
@@ -73,43 +88,64 @@
     {
       "type": "way",
       "id": "Hallway-StaffOffice",
-      "nodes": ["Hallway", "StaffOffice"],
+      "nodes": [
+        "Hallway",
+        "StaffOffice"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentI",
-      "nodes": ["Hallway", "StudentI"],
+      "nodes": [
+        "Hallway",
+        "StudentI"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentJ",
-      "nodes": ["Hallway", "StudentJ"],
+      "nodes": [
+        "Hallway",
+        "StudentJ"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentN",
-      "nodes": ["Hallway", "StudentN"],
+      "nodes": [
+        "Hallway",
+        "StudentN"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentM",
-      "nodes": ["Hallway", "StudentM"],
+      "nodes": [
+        "Hallway",
+        "StudentM"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentL",
-      "nodes": ["Hallway", "StudentL"],
+      "nodes": [
+        "Hallway",
+        "StudentL"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Hallway-StudentK",
-      "nodes": ["Hallway", "StudentK"],
+      "nodes": [
+        "Hallway",
+        "StudentK"
+      ],
       "tags": {}
     },
     {
@@ -131,55 +167,82 @@
     {
       "type": "way",
       "id": "Professor-StudentA",
-      "nodes": ["Professor", "StudentA"],
+      "nodes": [
+        "Professor",
+        "StudentA"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentB",
-      "nodes": ["Professor", "StudentB"],
+      "nodes": [
+        "Professor",
+        "StudentB"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentC",
-      "nodes": ["Professor", "StudentC"],
+      "nodes": [
+        "Professor",
+        "StudentC"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentD",
-      "nodes": ["Professor", "StudentD"],
+      "nodes": [
+        "Professor",
+        "StudentD"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentE",
-      "nodes": ["Professor", "StudentE"],
+      "nodes": [
+        "Professor",
+        "StudentE"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentF",
-      "nodes": ["Professor", "StudentF"],
+      "nodes": [
+        "Professor",
+        "StudentF"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentG",
-      "nodes": ["Professor", "StudentG"],
+      "nodes": [
+        "Professor",
+        "StudentG"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StaffOffice",
-      "nodes": ["Professor", "StaffOffice"],
+      "nodes": [
+        "Professor",
+        "StaffOffice"
+      ],
       "tags": {}
     },
     {
       "type": "way",
       "id": "Professor-StudentH",
-      "nodes": ["Professor", "StudentH"],
+      "nodes": [
+        "Professor",
+        "StudentH"
+      ],
       "tags": {}
     },
     {
