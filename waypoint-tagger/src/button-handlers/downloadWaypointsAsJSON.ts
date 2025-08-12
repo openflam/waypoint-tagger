@@ -27,10 +27,11 @@ import { ElementArraySchema } from "../schema";
 /**
  * compares two entities by their "id" attribute in lexicographical order.
  *
- * @param a - The first entity to compare, must have 'id' field (string)
- * @param b - The second entity to compare, must have 'id' field (string)
+ * @param a - The first entity to compare, must implement `getAttribute('id'): string`
+ * @param b - The second entity to compare, must implement `getAttribute('id'): string`
  */
-const byId = (a: Entity, b: Entity) => a.id.localeCompare(b.id);
+const byId = (a: Entity, b: Entity) =>
+  a.getAttribute("id").localeCompare(b.getAttribute("id"));
 
 function downloadWaypointsAsJSON() {
   // get all way_point entities, sorted by id
