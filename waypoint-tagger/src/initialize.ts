@@ -1,8 +1,8 @@
-import { waitForElement } from "./utils";
+import { addWaypoint } from "./button-handlers/addWaypoint";
 import { downloadWaypointsAsJSON } from "./button-handlers/downloadWaypointsAsJSON";
 import { loadGLBFromFile } from "./button-handlers/loadGLB";
 import { loadWaypointsFromFile } from "./button-handlers/loadWaypoints";
-import { addWaypoint } from "./button-handlers/addWaypoint";
+import { waitForElement } from "./utils";
 
 function initializeAframeInspector() {
   window.addEventListener("load", () => {
