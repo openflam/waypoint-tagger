@@ -13,7 +13,7 @@ function loadWaypointsFromFile(fileSelectEvent: Event): void {
   )
     throw new Error("file select target is not defined");
 
-  const file = input.files![0];
+  const [file] = input.files!;
   const extension = file.name.split(".").slice(-1)[0].toLowerCase();
 
   if (!["csv", "json"].includes(extension))
