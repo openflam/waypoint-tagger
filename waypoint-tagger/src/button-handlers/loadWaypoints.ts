@@ -103,6 +103,7 @@ function createWaypointEntitiesFromCSV(
     entity.setAttribute("way_point", {
       ID: row.id,
       description: row.description || "", // assuming description might be an empty string if not provided
+      tags: row.tags,
     });
     entity.setAttribute("id", row.id);
 
@@ -133,12 +134,12 @@ function createWaypointEntitiesFromJSON(elements: Element[]) {
   // first loop: create entities for nodes
   for (const e of elements) {
     if (e.type !== "node") continue;
-    const { lat: x, "ele:local": y, lon: z, id, description } = e;
+    const { lat: x, "ele:local": y, lon: z, id, description, tags } = e;
 
     const entity = document.createElement("a-entity");
     entity.setAttribute("position", `${x} ${y} ${z}`);
     entity.setAttribute("id", id);
-    entity.setAttribute("way_point", { ID: id, description });
+    entity.setAttribute("way_point", { ID: id, description, tags });
 
     // set the gltf-model attribute to the waypoint model
     entity.setAttribute("gltf-model", "#waypoint_model");

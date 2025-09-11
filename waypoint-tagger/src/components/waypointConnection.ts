@@ -1,6 +1,4 @@
-import type { LineBasicMaterial } from "three";
-import type { BufferGeometry } from "three";
-import type { Line } from "three";
+import type { BufferGeometry, Line, LineBasicMaterial } from "three";
 
 AFRAME.registerComponent("waypoint_connection", {
   schema: {

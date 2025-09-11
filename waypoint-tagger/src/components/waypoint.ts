@@ -4,6 +4,11 @@ AFRAME.registerComponent("way_point", {
   schema: {
     ID: { type: "string" },
     description: { type: "string" },
+    tags: {
+      default: {},
+      stringify: (value: object) =>
+        Object.entries(value).map(([key, value]) => `${key}=${value}`),
+    },
     neighbors: { type: "string" },
   },
 
