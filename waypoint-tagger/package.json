@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:inspector": "cd ../aframe-inspector && npm run dist:min && cp dist/aframe-inspector.min.js ../waypoint-tagger/dist/dependencies",
+    "build:inspector": "npm --prefix ../aframe-inspector run dist:max; cp ../aframe-inspector/dist/aframe-inspector.js ./dist/dependencies/",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "deploy": "tsc && vite build && gh-pages -d dist"

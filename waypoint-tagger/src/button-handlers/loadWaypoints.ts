@@ -1,6 +1,8 @@
 import type { Entity } from "aframe";
 import { ElementArraySchema, type Element } from "../schema";
+import { clearWaypoints } from "./clearWaypoints";
 
+/* loads either from a CSV or JSON, depending on the extension */
 function loadWaypointsFromFile(fileSelectEvent: Event): void {
   const input = fileSelectEvent.target;
   if (
@@ -11,18 +13,22 @@ function loadWaypointsFromFile(fileSelectEvent: Event): void {
   )
     throw new Error("file select target is not defined");
 
-  const file = input.files![0];
-  const [extension] = file.name.split(".").slice(-1);
+  const [file] = input.files!;
+  const extension = file.name.split(".").slice(-1)[0].toLowerCase();
 
-  switch (extension.toLowerCase()) {
+  if (!["csv", "json"].includes(extension))
+    throw new Error(`unsupported file extension: .${extension}`);
+
+  // clear existing waypoints before loading new ones
+  clearWaypoints();
+
+  switch (extension) {
     case "csv":
       loadWaypointsFromCSVFile(file);
       return;
     case "json":
       loadWaypointsFromJSONFile(file);
       return;
-    default:
-      throw new Error(`unsupported file extension: .${extension}`);
   }
 }
 
@@ -97,6 +103,7 @@ function createWaypointEntitiesFromCSV(
     entity.setAttribute("way_point", {
       ID: row.id,
       description: row.description || "", // assuming description might be an empty string if not provided
+      tags: row.tags,
     });
     entity.setAttribute("id", row.id);
 
@@ -127,12 +134,12 @@ function createWaypointEntitiesFromJSON(elements: Element[]) {
   // first loop: create entities for nodes
   for (const e of elements) {
     if (e.type !== "node") continue;
-    const { lat: x, "ele:local": y, lon: z, id, description } = e;
+    const { lat: x, "ele:local": y, lon: z, id, description, tags } = e;
 
     const entity = document.createElement("a-entity");
     entity.setAttribute("position", `${x} ${y} ${z}`);
     entity.setAttribute("id", id);
-    entity.setAttribute("way_point", { ID: id, description });
+    entity.setAttribute("way_point", { ID: id, description, tags });
 
     // set the gltf-model attribute to the waypoint model
     entity.setAttribute("gltf-model", "#waypoint_model");

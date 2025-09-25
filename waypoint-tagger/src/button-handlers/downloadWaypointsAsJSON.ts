@@ -48,15 +48,17 @@ function downloadWaypointsAsJSON() {
       y: number;
       z: number;
       description: string;
+      tags: object;
       neighbors: Array<string>; // array of ids
     }
   >();
   for (const wp of waypointEntities) {
     const id = wp.getAttribute("id"); // TODO: this should be numeric!
     const { x, y, z } = wp.object3D.position;
-    const description = wp.components.way_point.data.description;
-    const neighbors = wp.components.way_point.data.neighbors.split(",");
-    waypointEntitiesMap.set(id, { id, x, y, z, description, neighbors });
+    const description = wp.components.way_point.data.description ?? "";
+    const neighbors = wp.components.way_point.data.neighbors.split(",") ?? [];
+    const tags = wp.components.way_point.data.tags ?? {};
+    waypointEntitiesMap.set(id, { id, x, y, z, description, tags, neighbors });
   }
 
   // initialize the array of output elements
@@ -65,13 +67,14 @@ function downloadWaypointsAsJSON() {
   // iterate through nodes in _increasing_ order of id
   for (const [
     _,
-    { id, x, y, z, description, neighbors },
+    { id, x, y, z, description, tags, neighbors },
   ] of waypointEntitiesMap) {
     // add way_point as 'node'
     const waypointNode = {
       type: "node",
       id,
       description,
+      tags,
       lat: x,
       "ele:local": y,
       lon: z,

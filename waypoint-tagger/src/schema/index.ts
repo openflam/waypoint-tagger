@@ -7,6 +7,7 @@ export const NodeSchema = z.object({
   lat: z.number(), // x
   "ele:local": z.number(), // y
   lon: z.number(), // z
+  tags: z.object(),
 });
 export type Node = z.infer<typeof NodeSchema>;
 
